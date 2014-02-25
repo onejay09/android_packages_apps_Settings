@@ -174,10 +174,8 @@ public class Settings extends PreferenceActivity
             R.id.print_settings,
             R.id.nfc_payment_settings,
             R.id.home_settings,
-            R.id.interface_section,
             R.id.lock_screen_settings,
             R.id.system_settings,
-            R.id.privacy_settings_cyanogenmod,
             R.id.button_settings
     };
 
@@ -376,8 +374,7 @@ public class Settings extends PreferenceActivity
         ProfilesSettings.class.getName(),
         PerformanceSettings.class.getName(),
         PolicyNativeFragment.class.getName(),
-        com.android.settings.cyanogenmod.PrivacySettings.class.getName(),
-        com.android.settings.quicksettings.QuickSettingsTiles.class.getName()
+        com.android.settings.cyanogenmod.PrivacySettings.class.getName()
     };
 
     @Override
@@ -1205,5 +1202,4 @@ public class Settings extends PreferenceActivity
     public static class ApnEditorActivity extends Settings { /* empty */ }
     public static class BlacklistSettingsActivity extends Settings { /* empty */ }
     public static class SystemSettingsActivity extends Settings { /* empty */ }
-    public static class QuickSettingsConfigActivity extends Settings { /* empty */ }
 }

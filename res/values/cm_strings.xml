@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-     Copyright (C) 2012-2014 The CyanogenMod Project
+     Copyright (C) 2012-2013 The CyanogenMod Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -510,7 +510,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="anonymous_learn_more">Learn more</string>
 
     <!-- Anonymous Statistics - Notification -->
-    <string name="anonymous_notification_desc">Enable or disable CyanogenMod Statistics</string>
+    <string name="anonymous_notification_desc">Enable or Disable CyanogenMod Statistics</string>
 
     <!-- Anonymous Statistics - Preview -->
     <string name="preview_id_title">Unique ID</string>
@@ -530,7 +530,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="performance_settings_title">Performance</string>
 
     <!-- Performance Settings : Warning dialog -->
-    <string name="performance_settings_warning_title">Proceed with caution</string>
+    <string name="performance_settings_warning_title">Proceed with Caution</string>
     <string name="performance_settings_warning">These settings are included for experimentation and any changes made to them have the potential to cause instability, crashes, data loss or hardware failures.\n\nWe request you do not file bug reports if any of these settings have been changed from the defaults.</string>
 
     <!-- Performance Settings : Set on boot option -->
@@ -563,6 +563,9 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Memory Management -->
     <string name="memory_management_title">Memory management</string>
+    <!-- zRam -->
+    <string name="pref_zram_title">zRam</string>
+    <string name="pref_zram_summary">Compress memory for increased virtual capacity (requires reboot)</string>
     <!-- KSM -->
     <string name="pref_ksm_title">Kernel samepage merging</string>
     <string name="pref_ksm_summary">KSM reduces physical memory requirements and improves performance</string>
@@ -584,7 +587,7 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
 
     <!-- Change Log strings -->
     <string name="changelog_title">View changelog</string>
-    <string name="changelog_loading">Loading changelog\u2026</string>
+    <string name="changelog_loading">Loading changelog...</string>
     <string name="changelog_error">Unable to load changelog</string>
     <string name="changelog_unknown">Unknown</string>
     <string name="changelog_version">Version</string>
@@ -615,7 +618,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="privacy_guard_filter_does_not_match">No apps with relevant permissions are installed</string>
     <string name="privacy_guard_help_title">Help</string>
     <string name="privacy_guard_reset_title">Reset</string>
-    <string name="privacy_guard_reset_text">Reset permissions?</string>
     <string name="privacy_guard_help_text">In this screen you can choose for which apps Privacy Guard should be active by simply tapping on them. Selected apps will not be able to access your personal data, such as contacts, messages or call logs. Long pressing on an entry opens the app details screen for that app.\n\nBy default built-in apps are not shown. If you want to show them, select the respective option in the menu.</string>
     <string name="privacy_guard_manager_show_system_apps">Show built-in apps</string>
     <string name="privacy_guard_manager_filter_permissions">Permission filter</string>
@@ -815,8 +817,6 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Navigation Bar -->
     <string name="navigation_bar_category">Navigation bar</string>
     <string name="navigation_bar_title">Buttons and layout</string>
-    <string name="navigation_bar_left_title">Left handed mode</string>
-    <string name="navigation_bar_left_summary">Place the navigation bar on the left side of the screen in landscape mode</string>
     <string name="navigation_bar_help_text">1 - To begin editing, tap the lock icon\n\n2 - Tap any button to assign or change functionality\n\n3 - Long press any button to rearrange the order\n\n4 - To save, tap the lock icon again\n\n5 - To restore system default, tap the reset button\n\n</string>
     <string name="navigation_bar_tips">\u2022 Actions can only be assigned to one button at a time\n\n\u2022 The home button cannot be re-assigned\n\n\u2022 Side buttons cannot be rearranged</string>
     <string name="navigation_bar_tips_title">Quick tips</string>
@@ -995,6 +995,15 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <!-- Stylus gestures -->
     <string name="stylus_app_not_installed">%s is not installed</string>
 
+    <!-- Performance Settings : Scrolling Cache -->
+    <string name="pref_scrollingcache_title">Scrolling cache</string>
+    <string name="pref_scrollingcache_summary">Scrolling cache may improve scrolling performance at the cost of memory</string>
+    <string name="pref_scrollingcache_force_enable">Force enable</string>
+    <string name="pref_scrollingcache_default_enable">Default enable</string>
+    <string name="pref_scrollingcache_default_disable">Default disable</string>
+    <string name="pref_scrollingcache_force_disable">Force disable</string>
+
+
     <!-- Whether to display IME switcher notifcation -->
     <string name="ime_switcher_notify">Selector notification</string>
     <string name="ime_switcher_notify_summary">Display input method selector notification</string>
@@ -1017,14 +1026,16 @@ two in order to insert additional control points. \'Remove\' deletes the selecte
     <string name="app_ops_allowed_count">Allowed <xliff:g id="count" example="2 times">%s</xliff:g></string>
     <string name="app_ops_ignored_count">Denied <xliff:g id="count" example="2 times">%s</xliff:g></string>
     <string name="app_ops_both_count">Allowed <xliff:g id="count">%1$s</xliff:g>, denied <xliff:g id="count">%2$s</xliff:g></string>
+    <plurals name="app_ops_count">
+        <item quantity="one">once</item>
+        <item quantity="other">%d times</item>
+    </plurals>
+
     <!-- App ops menu options -->
     <string name="app_ops_show_user_apps">Show user apps</string>
     <string name="app_ops_show_system_apps">Show built-in apps</string>
     <string name="app_ops_reset_counters">Reset allow/deny counters</string>
     <string name="app_ops_reset_confirm_title">Confirm counters reset</string>
-    <string name="app_ops_reset_confirm_mesg">Are you sure you wish to reset AppOps counters?</string>
+    <string name="app_ops_reset_confirm_mesg">Are you sure you wish to reset AppOps counters ?</string>
 
-    <!-- EdgeGesture service -->
-    <string name="edge_gesture_service_title">Block gesture touch events</string>
-    <string name="edge_gesture_service_summary">Don\'t send touch events for navigation and status bar gestures to apps</string>
 </resources>

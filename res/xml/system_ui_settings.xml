@@ -34,6 +34,17 @@
         android:fragment="com.android.settings.cyanogenmod.NotificationDrawer"
         android:title="@string/notification_drawer_title" />
 
+    <PreferenceScreen
+        android:id="@+id/initD"
+        android:fragment="com.android.settings.InitD"
+        android:title="@string/init_d_title"
+        android:summary="@string/header_summary_init_d" />
+
+    <PreferenceScreen
+        android:key="buildprop_modder"
+        android:title="@string/propmodder_title"
+        android:fragment="com.android.settings.cyanogenmod.PropModder"/>
+
     <ListPreference
             android:key="expanded_desktop"
             android:title="@string/power_menu_expanded_desktop"
@@ -69,11 +80,12 @@
             android:fragment="com.android.settings.cyanogenmod.NavRing"
             android:title="@string/navigation_ring_title" />
 
-        <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
-            android:key="navigation_bar_left"
-            android:title="@string/navigation_bar_left_title"
-            android:summary="@string/navigation_bar_left_summary"
-            android:defaultValue="false" />
+    <PreferenceScreen
+        android:key="wakelock_blocker"
+        android:fragment="com.android.settings.cyanogenmod.fragments.WakeLockBlocker"
+        android:title="@string/wakelock_blocker"
+        android:summary="@string/wakelock_blocker_header_summary" />
+
 
     </PreferenceCategory>
 

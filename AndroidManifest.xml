@@ -37,6 +37,7 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.MODIFY_PHONE_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.WRITE_APN_SETTINGS"/>
     <uses-permission android:name="android.permission.ACCESS_CHECKIN_PROPERTIES"/>
     <uses-permission android:name="android.permission.READ_USER_DICTIONARY"/>
@@ -70,6 +71,7 @@
     <uses-permission android:name="android.permission.MANAGE_DEVICE_ADMINS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.CHANGE_PRIVACY_GUARD_STATE" />
+    <uses-permission android:name="android.permission.GET_TOP_ACTIVITY_INFO"/>
 
     <permission
         android:name="android.permission.REQUEST_SUPERUSER"
@@ -1704,20 +1706,6 @@
                 android:resource="@id/system_settings" />
         </activity>
 
-        <activity android:name="Settings$QuickSettingsConfigActivity"
-                android:label="@string/tile_picker_title"
-                android:taskAffinity=""
-                android:excludeFromRecents="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-            <meta-data android:name="com.android.settings.FRAGMENT_CLASS"
-                android:value="com.android.settings.quicksettings.QuickSettingsTiles" />
-        </activity>
-
-        <activity android:name=".quicksettings.QuickSettingsTiles" />
-
         <activity android:name=".cyanogenmod.AutoBrightnessSetup"
                 android:excludeFromRecents="true"
                 android:theme="@*android:style/Theme.Holo.Dialog.Alert" />
@@ -1767,6 +1755,9 @@
 
         <activity android:name=".profiles.NFCProfileSelect" />
 
+
+        <activity android:name=".util.ShowBuildProp" />
+
         <activity android:name=".profiles.NFCProfile"
                 android:theme="@android:style/Theme.NoDisplay">
             <intent-filter>
@@ -1796,6 +1787,22 @@
 
         <activity android:name=".cyanogenmod.LockscreenInterface" />
 
+        <activity
+            android:name=".cyanogenmod.fragments.ScreenStateToggles"
+            android:label="@string/screen_state_toggles_title" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".cyanogenmod.fragments.WakeLockBlocker"
+            android:label="@string/wakelock_blocker" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".notificationlight.NotificationLightSettings" />
 
         <activity android:name=".notificationlight.BatteryLightSettings" />
@@ -1822,6 +1829,32 @@
         <activity android:name=".cyanogenmod.PrivacySettings" />
 
         <!-- CyanogenMod activities End -->
+
+        <service android:name=".cyanogenmod.BootService"/>
+
+        <!-- PerformanceControl activities -->
+        <activity android:name="com.brewcrewfoo.performance.activities.MainActivity"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.PCSettings"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.PackActivity"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.FlasherActivity"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.FileChooser"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.ResidualsActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.iResidualsActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.KSMActivity"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.FreezerActivity"
+                  android:configChanges="keyboardHidden|orientation|screenSize"/>
+        <activity android:name="com.brewcrewfoo.performance.activities.GovSetActivity"/>
+
+        <receiver android:name="com.brewcrewfoo.performance.service.BootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+
+        <service android:name="com.brewcrewfoo.performance.service.BootService"/>
 
         <!-- Pseudo-activity used to provide an intent-filter entry point to encryption settings -->
         <activity android:name="Settings$CryptKeeperSettingsActivity"
