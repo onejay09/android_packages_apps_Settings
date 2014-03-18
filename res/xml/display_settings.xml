@@ -83,6 +83,12 @@
             android:title="@string/double_tap_to_wake_title"
             android:defaultValue="false" />
 
+    <CheckBoxPreference
+        android:key="pref_force_highend_gfx"
+        android:title="@string/pref_force_highend_gfx_title"
+        android:summary="@string/pref_force_highend_gfx_summary" />
+
+
         <com.android.settings.cyanogenmod.SystemSettingCheckBoxPreference
             android:key="screen_off_animation"
             android:title="@string/screen_animation_off_title"

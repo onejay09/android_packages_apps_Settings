@@ -37,6 +37,15 @@
             android:entryValues="@array/entries_wifi_scan"
             android:persistent="true" />
 
+
+        <ListPreference android:key="pref_lcd_density"
+            android:dialogTitle="@string/pref_lcd_density_title"
+            android:title="@string/pref_lcd_density_title"
+            android:summary="@string/pref_lcd_density_summary"
+            android:entries="@array/entries_lcd_density"
+            android:entryValues="@array/entries_lcd_density"
+            android:persistent="true" />
+
         <ListPreference android:key="pref_sleep"
             android:dialogTitle="@string/pref_sleep_title"
             android:title="@string/pref_sleep_title"
@@ -121,6 +130,21 @@
         <CheckBoxPreference android:key="pref_ram"
             android:title="@string/pref_ram_title"
             android:summary="@string/pref_ram_summary"
+            android:persistent="true" />
+
+        <CheckBoxPreference android:key="pref_amr"
+            android:title="@string/pref_amr_title"
+            android:summary="@string/pref_amr_summary"
+            android:persistent="true" />
+
+        <CheckBoxPreference android:key="pref_sel"
+            android:title="@string/pref_sel_title"
+            android:summary="@string/pref_sel_summary"
+            android:persistent="true" />
+
+        <CheckBoxPreference android:key="pref_vsync"
+            android:title="@string/pref_vsync_title"
+            android:summary="@string/pref_vsync_summary"
             android:persistent="true" />
 
    </PreferenceCategory>

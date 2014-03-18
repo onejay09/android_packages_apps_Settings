@@ -399,7 +399,7 @@
 
     <!-- Init.d -->
     <string name="header_summary_init_d">@null</string>
-    <string name="init_d_title">Init.d</string>
+    <string name="init_d_title">Sysfs Tweaks</string>
     <string name="app_name">Init.d Conf</string>
     <string name="pt_general">General</string>
     <string name="pt_zipalign_apks">Zipalign apps</string>
@@ -465,7 +465,7 @@
     <string name="performance_settings_warning_header">Warning</string>
 
     <!-- PropModder -->
-    <string name="propmodder_title">Build.prop Mods</string>
+    <string name="propmodder_title">Build prop Tweaks</string>
     <string name="propmodder_switches">Switches</string>
     <string name="buildprop_title">build.prop mods (by Onejay09)</string>
     <string name="buildprop_settings_warning">These settings are included for experimentation and any changes made to them have the potential to cause instability, crashes, data loss or hardware failures.\n\nWe request you do not file bug reports if any of these settings have been changed from the defaults.</string>
@@ -473,6 +473,9 @@
     <string name="pref_wifi_scan_interval_title">Wifi scan interval</string>
     <string name="pref_wifi_scan_interval_summary">The time between wifi scans when no stored access points are available</string>
     <string name="pref_wifi_scan_alt_summary">Time between wifi scans: %s</string>
+    <string name="pref_lcd_density_title">Lcd Screen Density</string>
+    <string name="pref_lcd_density_summary">The Density of the displays graphics in dots per inch</string>
+    <string name="pref_lcd_density_alt_summary">Lcd Density: %s</string>
     <string name="pref_max_events_title">Windows Manager\'s max events per second</string>
     <string name="pref_max_events_summary">This is a runtime value that controls the number of events the system will allow in a second</string>
     <string name="pref_max_events_alt_summary">Max number of system events: %s</string>
@@ -505,8 +508,14 @@
     <string name="pref_sleep_alt_summary">Current Sleep Mode: %s</string>
     <string name="pref_jit_title">Just In Time Complier</string>
     <string name="pref_jit_summary">Enables/Disables JIT complier</string>
-    <string name="pref_ram_title">Low ram switch</string>
-    <string name="pref_ram_summary">Enables/Disables Low ram option</string>
+    <string name="pref_ram_title">Low Ram Device</string>
+    <string name="pref_ram_summary">Turns off Memory hungry stuff</string>
+    <string name="pref_amr_title">AMR Wideband</string>
+    <string name="pref_amr_summary">Enable voice Call Clarity</string>
+    <string name="pref_sel_title">SE Linux</string>
+    <string name="pref_sel_summary">Enable selinux</string>
+    <string name="pref_vsync_title">Vsync</string>
+    <string name="pref_vsync_summary">Disable sync</string>
     <string name="pref_tcp_stack_title">Optimize TCP Stack</string>
     <string name="pref_tcp_stack_summary">Modify the buffer-size for better performance</string>
     <string name="pref_g_speed_title">3G Speed Hack</string>

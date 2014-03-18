@@ -66,7 +66,7 @@ public class PropModder extends PreferenceFragment implements
     private static final String REPLACE_CMD = "busybox sed -i \"/%s/ c %<s=%s\" /system/build.prop";
     private static final String LOGCAT_CMD = "busybox sed -i \"/log/ c %s\" /system/etc/init.d/72propmodder_script";
     private static final String FIND_CMD = "grep -q \"%s\" /system/build.prop";
-    private static final String REMOUNT_CMD = "busybox mount -o %s,remount -t yaffs2 /dev/block/mtdblock1 /system";
+    private static final String REMOUNT_CMD = "mount -o remount,%s /system";
     private static final String PROP_EXISTS_CMD = "grep -q %s /system/build.prop";
     private static final String DISABLE = "disable";
     private static final String SHOWBUILD_PATH = "/system/tmp/showbuild";
@@ -75,6 +75,10 @@ public class PropModder extends PreferenceFragment implements
     private static final String WIFI_SCAN_PROP = "wifi.supplicant_scan_interval";
     private static final String WIFI_SCAN_PERSIST_PROP = "persist.wifi_scan_interval";
     private static final String WIFI_SCAN_DEFAULT = System.getProperty(WIFI_SCAN_PROP);
+    private static final String LCD_DENSITY_PREF = "pref_lcd_density";
+    private static final String LCD_DENSITY_PROP = "ro.sf.lcd_density";
+    private static final String LCD_DENSITY_PERSIST_PROP = "persist.lcd_density";
+    private static final String LCD_DENSITY_DEFAULT = System.getProperty(LCD_DENSITY_PROP);
     private static final String MAX_EVENTS_PREF = "pref_max_events";
     private static final String MAX_EVENTS_PROP = "windowsmgr.max_events_per_sec";
     private static final String MAX_EVENTS_PERSIST_PROP = "persist.max_events";
@@ -136,6 +140,15 @@ public class PropModder extends PreferenceFragment implements
     private static final String RAM_PREF = "pref_ram";
     private static final String RAM_PERSIST_PROP = "persist_ram";
     private static final String RAM_PROP = "ro.config.low_ram";
+    private static final String AMR_PREF = "pref_amr";
+    private static final String AMR_PERSIST_PROP = "persist_amr";
+    private static final String AMR_PROP = "ro.ril.enable.amr.wideband";
+    private static final String SEL_PREF = "pref_sel";
+    private static final String SEL_PERSIST_PROP = "persist_sel";
+    private static final String SEL_PROP = "ro.build.selinux";
+    private static final String VSYNC_PREF = "pref_vsync";
+    private static final String VSYNC_PERSIST_PROP = "persist_vsync";
+    private static final String VSYNC_PROP = "hwui.disable_vsync";
     
 
     private String placeholder;
@@ -151,6 +164,7 @@ public class PropModder extends PreferenceFragment implements
     private int NOTE_ID;
 
     private ListPreference mWifiScanPref;
+    private ListPreference mlcddensityPref;
     private ListPreference mMaxEventsPref;
     private ListPreference mRingDelayPref;
     private ListPreference mVmHeapsizePref;
@@ -165,6 +179,9 @@ public class PropModder extends PreferenceFragment implements
     private AlertDialog mAlertDialog;
     private NotificationManager mNotificationManager;
     private CheckBoxPreference mramPref;
+    private CheckBoxPreference mamrPref;
+    private CheckBoxPreference mselPref;
+    private CheckBoxPreference mvsyncPref;
 
     private File tmpDir = new File("/system/tmp");
     private File init_d = new File("/system/etc/init.d");
@@ -182,6 +199,9 @@ public class PropModder extends PreferenceFragment implements
 
         mWifiScanPref = (ListPreference) prefSet.findPreference(WIFI_SCAN_PREF);
         mWifiScanPref.setOnPreferenceChangeListener(this);
+
+        mlcddensityPref = (ListPreference) prefSet.findPreference(LCD_DENSITY_PREF);
+        mlcddensityPref.setOnPreferenceChangeListener(this);
 
         mMaxEventsPref = (ListPreference) prefSet.findPreference(MAX_EVENTS_PREF);
         mMaxEventsPref.setOnPreferenceChangeListener(this);
@@ -205,6 +225,9 @@ public class PropModder extends PreferenceFragment implements
 
         mJitPref = (CheckBoxPreference) prefSet.findPreference(JIT_PREF);
         mramPref = (CheckBoxPreference) prefSet.findPreference(RAM_PREF);
+        mamrPref = (CheckBoxPreference) prefSet.findPreference(AMR_PREF);
+        mselPref = (CheckBoxPreference) prefSet.findPreference(SEL_PREF);
+        mvsyncPref = (CheckBoxPreference) prefSet.findPreference(VSYNC_PREF);
 
         mModVersionPref = (EditTextPreference) prefSet.findPreference(MOD_VERSION_PREF);
         String mod = Helpers.findBuildPropValueOf(MOD_VERSION_PROP);
@@ -258,6 +281,18 @@ public class PropModder extends PreferenceFragment implements
             Log.d(TAG, "mramPref.onPreferenceTreeClick()");
             value = mramPref.isChecked();
             return doMod(RAM_PERSIST_PROP, RAM_PROP, String.valueOf(value ? "true" : "false"));
+        }   else if (preference == mamrPref) {
+            Log.d(TAG, "mamrPref.onPreferenceTreeClick()");
+            value = mamrPref.isChecked();
+            return doMod(AMR_PERSIST_PROP, AMR_PROP, String.valueOf(value ? "1" : "0"));
+        }   else if (preference == mselPref) {
+            Log.d(TAG, "mselPref.onPreferenceTreeClick()");
+            value = mselPref.isChecked();
+            return doMod(SEL_PERSIST_PROP, SEL_PROP, String.valueOf(value ? "1" : "0"));
+        }   else if (preference == mvsyncPref) {
+            Log.d(TAG, "mvsyncPref.onPreferenceTreeClick()");
+            value = mvsyncPref.isChecked();
+            return doMod(VSYNC_PERSIST_PROP, VSYNC_PROP, String.valueOf(value ? "true" : "false"));
         } else if (preference == m3gSpeedPref) {
             value = m3gSpeedPref.isChecked();
             return doMod(THREE_G_PERSIST_PROP, THREE_G_PROP_0, String.valueOf(value ? 1 : DISABLE))
@@ -282,6 +317,9 @@ public class PropModder extends PreferenceFragment implements
             Log.e(TAG, "New preference selected: " + newValue);
             if (preference == mWifiScanPref) {
                 return doMod(WIFI_SCAN_PERSIST_PROP, WIFI_SCAN_PROP,
+                        newValue.toString());
+            } else if (preference == mlcddensityPref) {
+                return doMod(LCD_DENSITY_PERSIST_PROP, LCD_DENSITY_PROP,
                         newValue.toString());
             } else if (preference == mMaxEventsPref) {
                 return doMod(MAX_EVENTS_PERSIST_PROP, MAX_EVENTS_PROP,
@@ -389,6 +427,13 @@ public class PropModder extends PreferenceFragment implements
         } else {
             mWifiScanPref.setValue(WIFI_SCAN_DEFAULT);
         }
+        String lcd = Helpers.findBuildPropValueOf(LCD_DENSITY_PROP);
+        if (!lcd.equals(DISABLE)) {
+            mlcddensityPref.setValue(lcd);
+            mlcddensityPref.setSummary(String.format(getString(R.string.pref_lcd_density_alt_summary), lcd));
+        } else {
+            mlcddensityPref.setValue(LCD_DENSITY_DEFAULT);
+        }
         String maxE = Helpers.findBuildPropValueOf(MAX_EVENTS_PROP);
         if (!maxE.equals(DISABLE)) {
             mMaxEventsPref.setValue(maxE);
@@ -448,6 +493,24 @@ public class PropModder extends PreferenceFragment implements
             mramPref.setChecked(true);
         } else {
             mramPref.setChecked(false);
+        }
+        String amr = Helpers.findBuildPropValueOf(AMR_PROP);
+        if (amr.equals("1")) {
+            mamrPref.setChecked(true);
+        } else {
+            mamrPref.setChecked(false);
+        }
+        String sel = Helpers.findBuildPropValueOf(SEL_PROP);
+        if (sel.equals("1")) {
+            mselPref.setChecked(true);
+        } else {
+            mselPref.setChecked(false);
+        }
+        String vsync = Helpers.findBuildPropValueOf(VSYNC_PROP);
+        if (vsync.equals("true")) {
+            mvsyncPref.setChecked(true);
+        } else {
+            mvsyncPref.setChecked(false);
         }
         String mod = Helpers.findBuildPropValueOf(MOD_VERSION_PROP);
         mModVersionPref.setSummary(String.format(getString(R.string.pref_mod_version_alt_summary), mod));
